@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: project for testing
+  contact:
+    email: jadson27101@gmail.com
+  version: 1.0.0
+servers:
+  - url: https://api.cryptokyiv.online/
+paths:
+  /transaction/{txHash}:
+    get:
+      description: Get transaction info by hash
+      parameters:
+        - name: txHash
+          in: path
+          description: 'Transaction hash'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TxHash'
+        '400':
+          description: Invalid hash
+        '500':
+          description: Invalid hash
+        '404':
+          description: page not found
+  /wallet/balance/{wallet}:
+    get:
+      description: Get wallet balance
+      parameters:
+        - name: wallet
+          in: path
+          description: 'wallet balance'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wallet'
+        '400':
+          description: Invalid hash
+        '500':
+          description: Invalid hash
+        '404':
+          description: page not found
+
+components:
+  schemas:
+    TxHash:
+      type: object
+      properties:
+        Hash:
+          type: string
+        Sender:
+          type: string
+        Receiver:
+          type: string
+        SumCost:
+          type: number
+        Value:
+          type: number
+        Nonce:
+          type: number
+        Gas:
+          type: number
+        GasPrice:
+          type: string
+        TransactionStatus:
+          type: string
+    Wallet:
+      type: object
+      properties:
+        Wallet:
+          type: string
+        Balance:
+          type: number
